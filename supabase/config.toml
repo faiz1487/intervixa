@@ -2,3 +2,6 @@ project_id = "ihyxemjksxwuovdabjxu"
 
 [functions.chat]
 verify_jwt = false
+
+[functions.ats-resume]
+verify_jwt = false
