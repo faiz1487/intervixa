@@ -16,7 +16,7 @@ import {
 
 const quickActions = [
   { icon: FileSearch, label: "ATS Resume Score", prompt: "I want to check my resume's ATS score. What do you need from me?" },
-  { icon: FilePlus2, label: "Create Resume", prompt: "Help me create an ATS-optimized resume. Ask me the relevant questions to get started." },
+  { icon: FilePlus2, label: "Create ATS Resume", prompt: "__NAV__/ats-resume-builder" },
   { icon: MessageSquareMore, label: "Interview Questions", prompt: "Generate interview questions for my target role. What role should I prepare for?" },
   { icon: AlertTriangle, label: "Scenario Questions", prompt: "Give me real-world production scenario questions for interview prep." },
   { icon: Map, label: "Prep Roadmap", prompt: "Create a structured interview preparation roadmap for me." },
