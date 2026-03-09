@@ -51,6 +51,16 @@ const Chat = () => {
     });
   }, []);
 
+  // Handle initial prompt from dashboard
+  useEffect(() => {
+    const state = location.state as { initialPrompt?: string } | null;
+    if (state?.initialPrompt && messages.length === 0) {
+      send(state.initialPrompt);
+      // Clear the state so it doesn't re-trigger
+      window.history.replaceState({}, document.title);
+    }
+  }, []);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/login");
