@@ -37,10 +37,28 @@ const ATSResumeBuilder = () => {
   const [skills, setSkills] = useState("");
   const [targetRole, setTargetRole] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isParsing, setIsParsing] = useState(false);
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [atsAnalysis, setAtsAnalysis] = useState<ATSAnalysis | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsParsing(true);
+    try {
+      const text = await parseResumeFile(file);
+      setResumeText(text);
+      toast.success(`Parsed "${file.name}" successfully!`);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to parse file.");
+    } finally {
+      setIsParsing(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
 
   const handleGenerate = async () => {
     if (!resumeText.trim() && !targetRole.trim()) {
