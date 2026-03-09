@@ -57,6 +57,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        glow: "hsl(var(--glow))",
+        "glow-secondary": "hsl(var(--glow-secondary))",
+        "surface-elevated": "hsl(var(--surface-elevated))",
+      },
+      fontFamily: {
+        display: ["Space Grotesk", "system-ui", "sans-serif"],
+        body: ["Inter", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
