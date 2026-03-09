@@ -2,8 +2,9 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft, Sparkles, Loader2, FileDown, Copy, Pencil, CheckCircle2,
-  AlertTriangle, TrendingUp, Search, Target,
+  AlertTriangle, TrendingUp, Search, Target, Upload,
 } from "lucide-react";
+import { parseResumeFile } from "@/lib/resume-parser";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
