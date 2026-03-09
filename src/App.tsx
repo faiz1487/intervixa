@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Chat from "./pages/Chat";
 import Login from "./pages/Login";
+import ATSResumeBuilder from "./pages/ATSResumeBuilder";
 import NotFound from "./pages/NotFound";
 import AuthGuard from "./components/AuthGuard";
 
