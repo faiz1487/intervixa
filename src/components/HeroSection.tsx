@@ -24,7 +24,7 @@ const HeroSection = () => {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
+            <img src={logo} alt="Intervixa AI" className="w-5 h-5" />
             <span className="text-sm font-medium text-muted-foreground">
               AI-Powered Career Assistant
             </span>
