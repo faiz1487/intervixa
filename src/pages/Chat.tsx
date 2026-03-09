@@ -104,17 +104,45 @@ const Chat = () => {
   return (
     <div className="h-screen flex flex-col bg-background">
       {/* Header */}
-      <header className="glass border-b border-border/30 px-4 py-3 flex items-center gap-3 shrink-0">
-        <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
-        <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-          <Sparkles className="w-4 h-4 text-primary-foreground" />
+      <header className="glass border-b border-border/30 px-4 py-3 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+          <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+            <Sparkles className="w-4 h-4 text-primary-foreground" />
+          </div>
+          <div>
+            <h1 className="font-display font-bold text-sm">Intervixa AI</h1>
+            <p className="text-xs text-muted-foreground">Your AI Career Assistant</p>
+          </div>
         </div>
-        <div>
-          <h1 className="font-display font-bold text-sm">Intervixa AI</h1>
-          <p className="text-xs text-muted-foreground">Your AI Career Assistant</p>
-        </div>
+
+        {user && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center gap-2 rounded-full hover:bg-secondary/50 px-2 py-1 transition-colors">
+                <span className="text-sm text-muted-foreground hidden sm:block">{user.name}</span>
+                <Avatar className="w-8 h-8">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback className="bg-primary/20 text-primary text-xs">
+                    {user.name.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <div className="px-3 py-2 border-b border-border">
+                <p className="text-sm font-medium">{user.name}</p>
+                <p className="text-xs text-muted-foreground">{user.email}</p>
+              </div>
+              <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive cursor-pointer">
+                <LogOut className="w-4 h-4 mr-2" />
+                Sign out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </header>
 
       {/* Messages */}
