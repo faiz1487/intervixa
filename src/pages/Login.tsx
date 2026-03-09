@@ -14,12 +14,12 @@ const Login = () => {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
-        navigate("/chat");
+        navigate("/dashboard");
       }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) navigate("/chat");
+      if (session) navigate("/dashboard");
     });
 
     return () => subscription.unsubscribe();

@@ -5,7 +5,7 @@ import { Send, Sparkles, ArrowLeft, Loader2, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { streamChat, type Msg } from "@/lib/chat";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -36,6 +36,7 @@ const Chat = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -48,6 +49,16 @@ const Chat = () => {
         });
       }
     });
+  }, []);
+
+  // Handle initial prompt from dashboard
+  useEffect(() => {
+    const state = location.state as { initialPrompt?: string } | null;
+    if (state?.initialPrompt && messages.length === 0) {
+      send(state.initialPrompt);
+      // Clear the state so it doesn't re-trigger
+      window.history.replaceState({}, document.title);
+    }
   }, []);
 
   const handleLogout = async () => {
@@ -106,7 +117,7 @@ const Chat = () => {
       {/* Header */}
       <header className="glass border-b border-border/30 px-4 py-3 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="text-muted-foreground hover:text-foreground">
+          <Button variant="ghost" size="icon" onClick={() => navigate("/dashboard")} className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">

@@ -1,35 +1,50 @@
 import { motion } from "framer-motion";
 import {
-  FileSearch,
-  FilePlus2,
-  MessageSquareMore,
-  AlertTriangle,
-  Map,
-  Mic,
-  ExternalLink,
-  UserSearch,
-  Mail,
-  Linkedin,
-  Briefcase,
+  Mic, FileSearch, Brain, Target, BarChart3, Shield,
 } from "lucide-react";
 
-const modules = [
-  { icon: FileSearch, title: "ATS Resume Score", desc: "Get an instant ATS compatibility score with keyword gap analysis." },
-  { icon: FilePlus2, title: "Resume Creator", desc: "Generate fully ATS-optimized resumes tailored to any role." },
-  { icon: MessageSquareMore, title: "Interview Questions", desc: "Role-specific technical, behavioral, and system design questions." },
-  { icon: AlertTriangle, title: "Scenario Questions", desc: "Real-world production scenarios with ideal troubleshooting strategies." },
-  { icon: Map, title: "Prep Roadmap", desc: "Week-by-week structured interview preparation plan." },
-  { icon: Mic, title: "Mock Interview", desc: "AI interviewer scores your answers and suggests improvements." },
-  { icon: ExternalLink, title: "Job Apply Links", desc: "Curated job listings with direct apply links from top boards." },
-  { icon: UserSearch, title: "HR Contact Finder", desc: "Find recruiters and HR contacts at your target companies." },
-  { icon: Mail, title: "Cold Email Generator", desc: "Professional outreach emails and LinkedIn messages." },
-  { icon: Linkedin, title: "LinkedIn Optimizer", desc: "Optimize your headline, about section, and SEO keywords." },
-  { icon: Briefcase, title: "Naukri Optimizer", desc: "Boost your Naukri profile for recruiter search visibility." },
+const features = [
+  {
+    icon: Mic,
+    title: "AI Mock Interviews",
+    desc: "Practice with an AI interviewer that adapts to your role. Get scored answers, real-time feedback, and detailed improvement tips.",
+    gradient: "from-primary/20 to-glow-secondary/20",
+  },
+  {
+    icon: FileSearch,
+    title: "Resume Analyzer",
+    desc: "Upload your resume and get an instant ATS compatibility score, keyword analysis, and actionable improvement suggestions.",
+    gradient: "from-glow-secondary/20 to-primary/20",
+  },
+  {
+    icon: Brain,
+    title: "Smart Question Bank",
+    desc: "Role-specific interview questions covering technical, behavioral, and system design — tailored to your experience level.",
+    gradient: "from-primary/20 to-glow-secondary/20",
+  },
+  {
+    icon: Target,
+    title: "Personalized Roadmaps",
+    desc: "Get a week-by-week preparation plan customized for your target role, company, and timeline.",
+    gradient: "from-glow-secondary/20 to-primary/20",
+  },
+  {
+    icon: BarChart3,
+    title: "Performance Analytics",
+    desc: "Track your progress over time with detailed charts showing score improvements, strengths, and areas to focus on.",
+    gradient: "from-primary/20 to-glow-secondary/20",
+  },
+  {
+    icon: Shield,
+    title: "ATS Optimization",
+    desc: "Ensure your resume passes Applicant Tracking Systems with keyword optimization and formatting suggestions.",
+    gradient: "from-glow-secondary/20 to-primary/20",
+  },
 ];
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
+  show: { transition: { staggerChildren: 0.08 } },
 };
 
 const item = {
@@ -39,19 +54,20 @@ const item = {
 
 const FeaturesSection = () => {
   return (
-    <section className="py-28 relative" id="features">
+    <section className="py-32 relative" id="features">
       <div className="container px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
+          <span className="text-primary text-sm font-semibold uppercase tracking-widest mb-3 block">Features</span>
           <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
-            11 Powerful <span className="text-gradient">AI Modules</span>
+            Everything You Need to <span className="text-gradient">Land the Job</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Everything you need to land your dream job — powered by AI that thinks like a recruiter.
+            A complete AI-powered career toolkit designed to help you prepare smarter and get hired faster.
           </p>
         </motion.div>
 
@@ -60,19 +76,22 @@ const FeaturesSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {modules.map((mod) => (
+          {features.map((f) => (
             <motion.div
-              key={mod.title}
+              key={f.title}
               variants={item}
-              className="group p-6 rounded-xl glass hover:border-primary/30 transition-all duration-300 hover:shadow-glow cursor-default"
+              className="group relative p-8 rounded-2xl glass hover:border-primary/30 transition-all duration-300 hover:shadow-glow"
             >
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <mod.icon className="w-5 h-5 text-primary" />
+              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                  <f.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-display font-semibold text-xl mb-3">{f.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
               </div>
-              <h3 className="font-display font-semibold text-lg mb-2">{mod.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{mod.desc}</p>
             </motion.div>
           ))}
         </motion.div>
