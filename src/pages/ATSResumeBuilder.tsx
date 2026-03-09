@@ -126,10 +126,33 @@ const ATSResumeBuilder = () => {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-6 space-y-5">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">📄 Paste Existing Resume</label>
+                  <div className="flex gap-2 mb-2">
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept=".pdf,.docx"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={isParsing}
+                      className="rounded-xl text-xs"
+                    >
+                      {isParsing ? (
+                        <><Loader2 className="w-3.5 h-3.5 animate-spin mr-1" /> Parsing...</>
+                      ) : (
+                        <><Upload className="w-3.5 h-3.5 mr-1" /> Upload PDF / DOCX</>
+                      )}
+                    </Button>
+                  </div>
                   <textarea
                     value={resumeText}
                     onChange={(e) => setResumeText(e.target.value)}
-                    placeholder="Paste your current resume text here..."
+                    placeholder="Paste your current resume text here or upload a file above..."
                     rows={8}
                     className="w-full bg-muted/50 border border-border/50 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground"
                   />
