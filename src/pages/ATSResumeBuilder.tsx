@@ -2,8 +2,9 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft, Sparkles, Loader2, FileDown, Copy, Pencil, CheckCircle2,
-  AlertTriangle, TrendingUp, Search, Target,
+  AlertTriangle, TrendingUp, Search, Target, Upload,
 } from "lucide-react";
+import { parseResumeFile } from "@/lib/resume-parser";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -36,10 +37,28 @@ const ATSResumeBuilder = () => {
   const [skills, setSkills] = useState("");
   const [targetRole, setTargetRole] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isParsing, setIsParsing] = useState(false);
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [atsAnalysis, setAtsAnalysis] = useState<ATSAnalysis | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsParsing(true);
+    try {
+      const text = await parseResumeFile(file);
+      setResumeText(text);
+      toast.success(`Parsed "${file.name}" successfully!`);
+    } catch (err: any) {
+      toast.error(err.message || "Failed to parse file.");
+    } finally {
+      setIsParsing(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
 
   const handleGenerate = async () => {
     if (!resumeText.trim() && !targetRole.trim()) {
@@ -107,10 +126,33 @@ const ATSResumeBuilder = () => {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-6 space-y-5">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">📄 Paste Existing Resume</label>
+                  <div className="flex gap-2 mb-2">
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept=".pdf,.docx"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={isParsing}
+                      className="rounded-xl text-xs"
+                    >
+                      {isParsing ? (
+                        <><Loader2 className="w-3.5 h-3.5 animate-spin mr-1" /> Parsing...</>
+                      ) : (
+                        <><Upload className="w-3.5 h-3.5 mr-1" /> Upload PDF / DOCX</>
+                      )}
+                    </Button>
+                  </div>
                   <textarea
                     value={resumeText}
                     onChange={(e) => setResumeText(e.target.value)}
-                    placeholder="Paste your current resume text here..."
+                    placeholder="Paste your current resume text here or upload a file above..."
                     rows={8}
                     className="w-full bg-muted/50 border border-border/50 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground"
                   />
