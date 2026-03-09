@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -39,9 +40,11 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-primary text-primary-foreground font-semibold px-8 py-6 text-lg shadow-glow hover:opacity-90 transition-opacity">
-              Get Started Free
-              <ArrowRight className="ml-2 w-5 h-5" />
+            <Button asChild size="lg" className="bg-gradient-primary text-primary-foreground font-semibold px-8 py-6 text-lg shadow-glow hover:opacity-90 transition-opacity">
+              <Link to="/chat">
+                Get Started Free
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
             </Button>
             <Button size="lg" variant="outline" className="px-8 py-6 text-lg border-border hover:bg-secondary">
               See How It Works

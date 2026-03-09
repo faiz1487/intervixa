@@ -1,5 +1,6 @@
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -17,8 +18,8 @@ const Navbar = () => {
           <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
         </div>
 
-        <Button size="sm" className="bg-gradient-primary text-primary-foreground font-medium shadow-glow hover:opacity-90 transition-opacity">
-          Get Started
+        <Button asChild size="sm" className="bg-gradient-primary text-primary-foreground font-medium shadow-glow hover:opacity-90 transition-opacity">
+          <Link to="/chat">Get Started</Link>
         </Button>
       </div>
     </nav>
