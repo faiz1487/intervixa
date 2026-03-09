@@ -1,4 +1,4 @@
-import { Sparkles } from "lucide-react";
+import logo from "@/assets/intervixa_logo.png";
 
 const Footer = () => (
   <footer className="border-t border-border py-12">
