@@ -1,6 +1,6 @@
-import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import logo from "@/assets/intervixa_logo.png";
 
 const Navbar = () => {
   return (
