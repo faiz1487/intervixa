@@ -31,6 +31,14 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/chat" element={<AuthGuard><Chat /></AuthGuard>} />
           <Route path="/ats-resume-builder" element={<AuthGuard><ATSResumeBuilder /></AuthGuard>} />
+          <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="jobs" element={<AdminJobs />} />
+            <Route path="questions" element={<AdminQuestions />} />
+            <Route path="hr-contacts" element={<AdminHRContacts />} />
+            <Route path="templates" element={<AdminTemplates />} />
+            <Route path="users" element={<AdminUsers />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
