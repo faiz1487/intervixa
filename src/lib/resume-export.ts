@@ -3,7 +3,15 @@ import { saveAs } from "file-saver";
 import type { ResumeData } from "@/pages/ATSResumeBuilder";
 
 export async function exportToPDF(element: HTMLElement) {
-  const html2pdf = (await import("html2pdf.js")).default;
+  // Load html2pdf from CDN to avoid duplicate React bundling
+  const script = document.createElement("script");
+  script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js";
+  await new Promise<void>((resolve, reject) => {
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Failed to load html2pdf"));
+    document.head.appendChild(script);
+  });
+  const html2pdf = (window as any).html2pdf;
   html2pdf()
     .set({
       margin: [10, 10, 10, 10],
