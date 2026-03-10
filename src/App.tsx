@@ -9,6 +9,14 @@ import Login from "./pages/Login";
 import ATSResumeBuilder from "./pages/ATSResumeBuilder";
 import NotFound from "./pages/NotFound";
 import AuthGuard from "./components/AuthGuard";
+import AdminGuard from "./components/admin/AdminGuard";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminJobs from "./pages/admin/AdminJobs";
+import AdminQuestions from "./pages/admin/AdminQuestions";
+import AdminHRContacts from "./pages/admin/AdminHRContacts";
+import AdminTemplates from "./pages/admin/AdminTemplates";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +31,14 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/chat" element={<AuthGuard><Chat /></AuthGuard>} />
           <Route path="/ats-resume-builder" element={<AuthGuard><ATSResumeBuilder /></AuthGuard>} />
+          <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="jobs" element={<AdminJobs />} />
+            <Route path="questions" element={<AdminQuestions />} />
+            <Route path="hr-contacts" element={<AdminHRContacts />} />
+            <Route path="templates" element={<AdminTemplates />} />
+            <Route path="users" element={<AdminUsers />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
