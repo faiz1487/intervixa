@@ -9,6 +9,14 @@ import Login from "./pages/Login";
 import ATSResumeBuilder from "./pages/ATSResumeBuilder";
 import NotFound from "./pages/NotFound";
 import AuthGuard from "./components/AuthGuard";
+import AdminGuard from "./components/admin/AdminGuard";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminJobs from "./pages/admin/AdminJobs";
+import AdminQuestions from "./pages/admin/AdminQuestions";
+import AdminHRContacts from "./pages/admin/AdminHRContacts";
+import AdminTemplates from "./pages/admin/AdminTemplates";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 const queryClient = new QueryClient();
 
