@@ -15,17 +15,17 @@ import {
 } from "lucide-react";
 
 const quickActions = [
-  { icon: FileSearch, label: "ATS Resume Score", prompt: "I want to check my resume's ATS score. What do you need from me?" },
-  { icon: FilePlus2, label: "Create ATS Resume", prompt: "__NAV__/ats-resume-builder" },
-  { icon: MessageSquareMore, label: "Interview Questions", prompt: "Generate interview questions for my target role. What role should I prepare for?" },
-  { icon: AlertTriangle, label: "Scenario Questions", prompt: "Give me real-world production scenario questions for interview prep." },
-  { icon: Map, label: "Prep Roadmap", prompt: "Create a structured interview preparation roadmap for me." },
-  { icon: Mic, label: "Mock Interview", prompt: "Start a mock interview session with me. Ask me one question at a time." },
-  { icon: ExternalLink, label: "Job Links", prompt: "Find job opportunities for me. What role and location should I search?" },
-  { icon: UserSearch, label: "HR Contacts", prompt: "Help me find HR contacts and recruiters at my target companies." },
-  { icon: Mail, label: "Cold Email", prompt: "Generate a professional cold outreach email for job applications." },
-  { icon: Linkedin, label: "LinkedIn Optimizer", prompt: "Help me optimize my LinkedIn profile for better recruiter visibility." },
-  { icon: Briefcase, label: "Naukri Optimizer", prompt: "Help me optimize my Naukri profile for better recruiter search visibility." },
+  { icon: FileSearch, label: "ATS Resume Score", path: "/modules/ats-resume-score" },
+  { icon: FilePlus2, label: "Create ATS Resume", path: "/ats-resume-builder" },
+  { icon: MessageSquareMore, label: "Interview Questions", path: "/modules/interview-questions" },
+  { icon: AlertTriangle, label: "Scenario Questions", path: "/modules/scenario-questions" },
+  { icon: Map, label: "Prep Roadmap", path: "/modules/prep-roadmap" },
+  { icon: Mic, label: "Mock Interview", path: "/modules/mock-interview" },
+  { icon: ExternalLink, label: "Job Links", path: "/modules/job-links" },
+  { icon: UserSearch, label: "HR Contacts", path: "/modules/hr-contacts" },
+  { icon: Mail, label: "Cold Email", path: "/modules/cold-email" },
+  { icon: Linkedin, label: "LinkedIn Optimizer", path: "/modules/linkedin-optimizer" },
+  { icon: Briefcase, label: "Naukri Optimizer", path: "/modules/naukri-optimizer" },
 ];
 
 const Chat = () => {
@@ -61,10 +61,6 @@ const Chat = () => {
 
   const send = async (text: string) => {
     if (!text.trim() || isLoading) return;
-    if (text.startsWith("__NAV__")) {
-      navigate(text.replace("__NAV__", ""));
-      return;
-    }
     const userMsg: Msg = { role: "user", content: text.trim() };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
@@ -167,7 +163,13 @@ const Chat = () => {
                 {quickActions.map((action) => (
                   <button
                     key={action.label}
-                    onClick={() => send(action.prompt)}
+                    onClick={() => {
+                      // For dashboard modules, always open the dedicated data page instead of sending a chat prompt
+                      if ("path" in action && action.path) {
+                        navigate(action.path);
+                        return;
+                      }
+                    }}
                     className="group p-4 rounded-xl glass hover:border-primary/30 transition-all duration-300 hover:shadow-glow text-left"
                   >
                     <action.icon className="w-5 h-5 text-primary mb-2" />
