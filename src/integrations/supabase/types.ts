@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      cold_email_templates: {
+        Row: {
+          created_at: string | null
+          email_body: string
+          email_subject: string
+          id: string
+          template_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          email_body?: string
+          email_subject: string
+          id?: string
+          template_name: string
+        }
+        Update: {
+          created_at?: string | null
+          email_body?: string
+          email_subject?: string
+          id?: string
+          template_name?: string
+        }
+        Relationships: []
+      }
       hr_contacts: {
         Row: {
           company: string
@@ -101,6 +125,102 @@ export type Database = {
         }
         Relationships: []
       }
+      linkedin_optimizer_tips: {
+        Row: {
+          created_at: string | null
+          example: string | null
+          id: string
+          optimization_tip: string
+          section: string
+        }
+        Insert: {
+          created_at?: string | null
+          example?: string | null
+          id?: string
+          optimization_tip: string
+          section: string
+        }
+        Update: {
+          created_at?: string | null
+          example?: string | null
+          id?: string
+          optimization_tip?: string
+          section?: string
+        }
+        Relationships: []
+      }
+      mock_interviews: {
+        Row: {
+          created_at: string | null
+          difficulty: string
+          id: string
+          question_set: string
+          role: string
+        }
+        Insert: {
+          created_at?: string | null
+          difficulty?: string
+          id?: string
+          question_set: string
+          role: string
+        }
+        Update: {
+          created_at?: string | null
+          difficulty?: string
+          id?: string
+          question_set?: string
+          role?: string
+        }
+        Relationships: []
+      }
+      naukri_optimizer_tips: {
+        Row: {
+          created_at: string | null
+          example: string | null
+          id: string
+          profile_section: string
+          suggestion: string
+        }
+        Insert: {
+          created_at?: string | null
+          example?: string | null
+          id?: string
+          profile_section: string
+          suggestion: string
+        }
+        Update: {
+          created_at?: string | null
+          example?: string | null
+          id?: string
+          profile_section?: string
+          suggestion?: string
+        }
+        Relationships: []
+      }
+      prep_roadmap: {
+        Row: {
+          created_at: string | null
+          id: string
+          resource_link: string | null
+          role: string
+          step: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          resource_link?: string | null
+          role: string
+          step: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          resource_link?: string | null
+          role?: string
+          step?: string
+        }
+        Relationships: []
+      }
       resume_templates: {
         Row: {
           created_at: string | null
@@ -119,6 +239,30 @@ export type Database = {
           file_url?: string
           id?: string
           name?: string
+        }
+        Relationships: []
+      }
+      scenario_questions: {
+        Row: {
+          created_at: string | null
+          explanation: string
+          id: string
+          scenario: string
+          technology: string
+        }
+        Insert: {
+          created_at?: string | null
+          explanation?: string
+          id?: string
+          scenario: string
+          technology?: string
+        }
+        Update: {
+          created_at?: string | null
+          explanation?: string
+          id?: string
+          scenario?: string
+          technology?: string
         }
         Relationships: []
       }
