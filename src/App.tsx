@@ -18,6 +18,18 @@ import AdminHRContacts from "./pages/admin/AdminHRContacts";
 import AdminTemplates from "./pages/admin/AdminTemplates";
 import AdminUsers from "./pages/admin/AdminUsers";
 
+// Module pages
+import JobLinksPage from "./pages/modules/JobLinksPage";
+import HRContactsPage from "./pages/modules/HRContactsPage";
+import InterviewQuestionsPage from "./pages/modules/InterviewQuestionsPage";
+import ScenarioQuestionsPage from "./pages/modules/ScenarioQuestionsPage";
+import PrepRoadmapPage from "./pages/modules/PrepRoadmapPage";
+import MockInterviewPage from "./pages/modules/MockInterviewPage";
+import ColdEmailPage from "./pages/modules/ColdEmailPage";
+import LinkedInOptimizerPage from "./pages/modules/LinkedInOptimizerPage";
+import NaukriOptimizerPage from "./pages/modules/NaukriOptimizerPage";
+import ATSResumeScorePage from "./pages/modules/ATSResumeScorePage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,6 +43,19 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/chat" element={<AuthGuard><Chat /></AuthGuard>} />
           <Route path="/ats-resume-builder" element={<AuthGuard><ATSResumeBuilder /></AuthGuard>} />
+
+          {/* Module pages */}
+          <Route path="/modules/job-links" element={<AuthGuard><JobLinksPage /></AuthGuard>} />
+          <Route path="/modules/hr-contacts" element={<AuthGuard><HRContactsPage /></AuthGuard>} />
+          <Route path="/modules/interview-questions" element={<AuthGuard><InterviewQuestionsPage /></AuthGuard>} />
+          <Route path="/modules/scenario-questions" element={<AuthGuard><ScenarioQuestionsPage /></AuthGuard>} />
+          <Route path="/modules/prep-roadmap" element={<AuthGuard><PrepRoadmapPage /></AuthGuard>} />
+          <Route path="/modules/mock-interview" element={<AuthGuard><MockInterviewPage /></AuthGuard>} />
+          <Route path="/modules/cold-email" element={<AuthGuard><ColdEmailPage /></AuthGuard>} />
+          <Route path="/modules/linkedin-optimizer" element={<AuthGuard><LinkedInOptimizerPage /></AuthGuard>} />
+          <Route path="/modules/naukri-optimizer" element={<AuthGuard><NaukriOptimizerPage /></AuthGuard>} />
+          <Route path="/modules/ats-resume-score" element={<AuthGuard><ATSResumeScorePage /></AuthGuard>} />
+
           <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
             <Route index element={<AdminDashboard />} />
             <Route path="jobs" element={<AdminJobs />} />
