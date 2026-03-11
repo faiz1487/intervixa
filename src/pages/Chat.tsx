@@ -15,17 +15,17 @@ import {
 } from "lucide-react";
 
 const quickActions = [
-  { icon: FileSearch, label: "ATS Resume Score", prompt: "I want to check my resume's ATS score. What do you need from me?" },
+  { icon: FileSearch, label: "ATS Resume Score", prompt: "__NAV__/modules/ats-resume-score" },
   { icon: FilePlus2, label: "Create ATS Resume", prompt: "__NAV__/ats-resume-builder" },
-  { icon: MessageSquareMore, label: "Interview Questions", prompt: "Generate interview questions for my target role. What role should I prepare for?" },
-  { icon: AlertTriangle, label: "Scenario Questions", prompt: "Give me real-world production scenario questions for interview prep." },
-  { icon: Map, label: "Prep Roadmap", prompt: "Create a structured interview preparation roadmap for me." },
-  { icon: Mic, label: "Mock Interview", prompt: "Start a mock interview session with me. Ask me one question at a time." },
-  { icon: ExternalLink, label: "Job Links", prompt: "Find job opportunities for me. What role and location should I search?" },
-  { icon: UserSearch, label: "HR Contacts", prompt: "Help me find HR contacts and recruiters at my target companies." },
-  { icon: Mail, label: "Cold Email", prompt: "Generate a professional cold outreach email for job applications." },
-  { icon: Linkedin, label: "LinkedIn Optimizer", prompt: "Help me optimize my LinkedIn profile for better recruiter visibility." },
-  { icon: Briefcase, label: "Naukri Optimizer", prompt: "Help me optimize my Naukri profile for better recruiter search visibility." },
+  { icon: MessageSquareMore, label: "Interview Questions", prompt: "__NAV__/modules/interview-questions" },
+  { icon: AlertTriangle, label: "Scenario Questions", prompt: "__NAV__/modules/scenario-questions" },
+  { icon: Map, label: "Prep Roadmap", prompt: "__NAV__/modules/prep-roadmap" },
+  { icon: Mic, label: "Mock Interview", prompt: "__NAV__/modules/mock-interview" },
+  { icon: ExternalLink, label: "Job Links", prompt: "__NAV__/modules/job-links" },
+  { icon: UserSearch, label: "HR Contacts", prompt: "__NAV__/modules/hr-contacts" },
+  { icon: Mail, label: "Cold Email", prompt: "__NAV__/modules/cold-email" },
+  { icon: Linkedin, label: "LinkedIn Optimizer", prompt: "__NAV__/modules/linkedin-optimizer" },
+  { icon: Briefcase, label: "Naukri Optimizer", prompt: "__NAV__/modules/naukri-optimizer" },
 ];
 
 const Chat = () => {
