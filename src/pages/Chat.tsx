@@ -240,8 +240,10 @@ const Chat = () => {
           <div ref={bottomRef} />
         </div>
       </div>
+      )}
 
-      {/* Input */}
+      {/* Input - only show in text mode */}
+      {!voiceMode && (
       <div className="shrink-0 border-t border-border/30 glass px-4 py-3">
         <div className="max-w-3xl mx-auto flex gap-2">
           <textarea
