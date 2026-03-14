@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
-import { Send, Sparkles, ArrowLeft, Loader2, LogOut } from "lucide-react";
+import { Send, Sparkles, ArrowLeft, Loader2, LogOut, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { streamChat, type Msg } from "@/lib/chat";
 import { toast } from "sonner";
