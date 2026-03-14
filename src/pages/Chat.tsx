@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
-import { Send, Sparkles, ArrowLeft, Loader2, LogOut } from "lucide-react";
+import { Send, Sparkles, ArrowLeft, Loader2, LogOut, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { streamChat, type Msg } from "@/lib/chat";
 import { toast } from "sonner";
@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import VoiceAssistant from "@/components/VoiceAssistant";
 import {
   FileSearch, FilePlus2, MessageSquareMore, AlertTriangle,
-  Map, Mic, ExternalLink, UserSearch, Mail, Linkedin, Briefcase,
+  Map, ExternalLink, UserSearch, Mail, Linkedin, Briefcase,
 } from "lucide-react";
 
 const quickActions = [
@@ -32,6 +33,7 @@ const Chat = () => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [voiceMode, setVoiceMode] = useState(false);
   const [user, setUser] = useState<{ name: string; avatar: string; email: string } | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -118,38 +120,59 @@ const Chat = () => {
           </div>
           <div>
             <h1 className="font-display font-bold text-sm">Intervixa AI</h1>
-            <p className="text-xs text-muted-foreground">Your AI Career Assistant</p>
+            <p className="text-xs text-muted-foreground">
+              {voiceMode ? "Voice Assistant" : "Your AI Career Assistant"}
+            </p>
           </div>
         </div>
 
-        {user && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-2 rounded-full hover:bg-secondary/50 px-2 py-1 transition-colors">
-                <span className="text-sm text-muted-foreground hidden sm:block">{user.name}</span>
-                <Avatar className="w-8 h-8">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="bg-primary/20 text-primary text-xs">
-                    {user.name.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <div className="px-3 py-2 border-b border-border">
-                <p className="text-sm font-medium">{user.name}</p>
-                <p className="text-xs text-muted-foreground">{user.email}</p>
-              </div>
-              <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive cursor-pointer">
-                <LogOut className="w-4 h-4 mr-2" />
-                Sign out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+        <div className="flex items-center gap-2">
+          <Button
+            variant={voiceMode ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setVoiceMode(!voiceMode)}
+            className={`gap-1.5 rounded-full ${voiceMode ? "bg-gradient-primary text-primary-foreground shadow-glow" : "text-muted-foreground hover:text-foreground"}`}
+          >
+            <Mic className="w-4 h-4" />
+            <span className="hidden sm:inline">Voice</span>
+          </Button>
+
+          {user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-2 rounded-full hover:bg-secondary/50 px-2 py-1 transition-colors">
+                  <span className="text-sm text-muted-foreground hidden sm:block">{user.name}</span>
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage src={user.avatar} alt={user.name} />
+                    <AvatarFallback className="bg-primary/20 text-primary text-xs">
+                      {user.name.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="px-3 py-2 border-b border-border">
+                  <p className="text-sm font-medium">{user.name}</p>
+                  <p className="text-xs text-muted-foreground">{user.email}</p>
+                </div>
+                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive cursor-pointer">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
       </header>
 
-      {/* Messages */}
+      {/* Content */}
+      {voiceMode ? (
+        <div className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="max-w-3xl mx-auto">
+            <VoiceAssistant />
+          </div>
+        </div>
+      ) : (
       <div className="flex-1 overflow-y-auto px-4 py-6">
         <div className="max-w-3xl mx-auto space-y-6">
           {messages.length === 0 && (
@@ -217,8 +240,10 @@ const Chat = () => {
           <div ref={bottomRef} />
         </div>
       </div>
+      )}
 
-      {/* Input */}
+      {/* Input - only show in text mode */}
+      {!voiceMode && (
       <div className="shrink-0 border-t border-border/30 glass px-4 py-3">
         <div className="max-w-3xl mx-auto flex gap-2">
           <textarea
@@ -240,6 +265,7 @@ const Chat = () => {
           </Button>
         </div>
       </div>
+      )}
     </div>
   );
 };
