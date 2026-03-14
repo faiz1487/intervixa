@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import VoiceAssistant from "@/components/VoiceAssistant";
 import {
   FileSearch, FilePlus2, MessageSquareMore, AlertTriangle,
   Map, Mic, ExternalLink, UserSearch, Mail, Linkedin, Briefcase,
