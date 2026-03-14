@@ -12,7 +12,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import VoiceAssistant from "@/components/VoiceAssistant";
 import {
   FileSearch, FilePlus2, MessageSquareMore, AlertTriangle,
-  Map, Mic, ExternalLink, UserSearch, Mail, Linkedin, Briefcase,
+  Map, ExternalLink, UserSearch, Mail, Linkedin, Briefcase,
 } from "lucide-react";
 
 const quickActions = [
