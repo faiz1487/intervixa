@@ -120,9 +120,22 @@ const Chat = () => {
           </div>
           <div>
             <h1 className="font-display font-bold text-sm">Intervixa AI</h1>
-            <p className="text-xs text-muted-foreground">Your AI Career Assistant</p>
+            <p className="text-xs text-muted-foreground">
+              {voiceMode ? "Voice Assistant" : "Your AI Career Assistant"}
+            </p>
           </div>
         </div>
+
+        <div className="flex items-center gap-2">
+          <Button
+            variant={voiceMode ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setVoiceMode(!voiceMode)}
+            className={`gap-1.5 rounded-full ${voiceMode ? "bg-gradient-primary text-primary-foreground shadow-glow" : "text-muted-foreground hover:text-foreground"}`}
+          >
+            <Mic className="w-4 h-4" />
+            <span className="hidden sm:inline">Voice</span>
+          </Button>
 
         {user && (
           <DropdownMenu>
