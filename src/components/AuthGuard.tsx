@@ -19,7 +19,15 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     });
 
     // Then check current session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        // Clear corrupted/stale session from a different project
+        supabase.auth.signOut().then(() => {
+          navigate("/login", { replace: true });
+          setLoading(false);
+        });
+        return;
+      }
       if (!session) {
         navigate("/login", { replace: true });
       } else {
