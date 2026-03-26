@@ -13,8 +13,14 @@ const Login = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    // Check session first
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    // Check session first, clear stale tokens if needed
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) {
+        // Stale session from a different project — clear it
+        supabase.auth.signOut();
+        setChecking(false);
+        return;
+      }
       if (session) {
         navigate("/chat", { replace: true });
       }
